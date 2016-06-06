@@ -1,0 +1,11 @@
+rem Copy this file to standalone.custom.bat and delete the "rem" comment markers of the variables to enable.
+rem
+rem This file may be edited to override settings from standalone.conf.bat.
+
+rem Memory settings for the Oracle JVM.  The value here will override the default value set in standalone.conf.bat.
+rem set USER_MEM_ARGS=-Xms2048m -Xmx2048m 
+
+rem Any custom java options required by custom components can be added here.
+rem These will be added to the other JAVA_OPTS passed to the command that starts JBoss.
+rem Do not add any properties that are already defined above or in standalone.conf.bat.
+rem set CUSTOM_JAVA_OPTS=
