@@ -26,6 +26,7 @@
 ## Specifying the scheme. Necessary when SSL is not performed at the app server
 ## level but enabled at different layer.
 #conf.suite.SCHEME=https
+conf.suite.SCHEME=http
 
 ## Used by both App Server and Engines to build up base URLs for links
 #conf.suite.APPLICATION_CONTEXT=suite
