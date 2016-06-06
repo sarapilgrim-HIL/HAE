@@ -34,7 +34,7 @@
 ## Do not specify the :port if the port is 80 and the SCHEME is http, or the
 ## port is 443 and SCHEME is https.  This is the hostname and port portion of
 ## the URL viewed by end users in links (e.g., links in emails)
-#conf.suite.SERVER_AND_PORT=<PROVIDE A VALUE>:8080
+conf.suite.SERVER_AND_PORT=test.appian.shamlal.com:8081
 
 ## The STATIC_PORTAL_CSS_SOURCE_URL, STATIC_FORMS_JS_SOURCE_URL, and
 ## STATIC_PORTAL_JS_SOURCE_URL allow specifying an external host
@@ -189,11 +189,11 @@
 ## the data source that will be used as the Appian data source.
 ## Note: This data source must point to a separate tablespace than any listed
 ## in the conf.data.datasources configuration.
-#conf.data.APPIAN_DATA_SOURCE=
+conf.data.APPIAN_DATA_SOURCE=jdbc/appian_primary_test
 ## Comma-separated list of JNDI names of data sources on the application server
 ## that will be used to store business data.  This list is used by the Query
 ## Database smart service and Data Stores.
-#conf.data.datasources=
+conf.data.datasources=jdbc/appian_business_dev
 
 ###################		
 #### Documents ####

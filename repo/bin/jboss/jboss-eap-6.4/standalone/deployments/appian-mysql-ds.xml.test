@@ -2,17 +2,40 @@
 <datasources xmlns="http://www.jboss.org/ironjacamar/schema">
   <!-- System Datasource -->
   <xa-datasource 
-      jndi-name="jdbc/AppianDS" 
-      pool-name="MySqlDS"
+      jndi-name="jdbc/appian_primary_test" 
+      pool-name="HILMYSQL907"
       enabled="true" 
       use-java-context="false">
-    <xa-datasource-property name="URL">jdbc:mysql://localhost:3306/appian_primary?useOldAliasMetadataBehavior=true</xa-datasource-property>
+    <xa-datasource-property name="URL">jdbc:mysql://192.168.2.207:3306/appian_primary_test?useOldAliasMetadataBehavior=true</xa-datasource-property>
     <xa-datasource-property name="useUnicode">true</xa-datasource-property>
     <xa-datasource-property name="characterEncoding">UTF-8</xa-datasource-property>
     <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
     <driver>com.mysql.jdbc</driver>
     <security>
       <security-domain>ds-name-security-primary</security-domain>
+    </security>
+    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+    <xa-pool>
+      <min-pool-size>5</min-pool-size>
+      <max-pool-size>100</max-pool-size>
+    </xa-pool>
+    <timeout>
+      <blocking-timeout-millis>5000</blocking-timeout-millis>
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+    </timeout>
+  </xa-datasource>
+	<xa-datasource 
+      jndi-name="jdbc/appian_business_dev" 
+      pool-name="HILMYSQL907"
+      enabled="true" 
+      use-java-context="false">
+    <xa-datasource-property name="URL">jdbc:mysql://192.168.2.207:3306/appian_business_test?useOldAliasMetadataBehavior=true</xa-datasource-property>
+    <xa-datasource-property name="useUnicode">true</xa-datasource-property>
+    <xa-datasource-property name="characterEncoding">UTF-8</xa-datasource-property>
+    <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+    <driver>com.mysql.jdbc</driver>
+    <security>
+      <security-domain>ds-name-security-business</security-domain>
     </security>
     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
     <xa-pool>

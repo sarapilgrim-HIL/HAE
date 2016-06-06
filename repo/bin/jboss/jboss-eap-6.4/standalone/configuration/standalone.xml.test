@@ -419,23 +419,31 @@
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
                 </security-domain>
-		        <security-domain name="messaging" cache-type="default">
-		          <authentication>
-		            <login-module code="RealmUsersRoles" flag="required">
-		              <module-option name="unauthenticatedIdentity" value="guest"/>
-		              <module-option name="usersProperties" value="${jboss.server.config.dir}/application-users.properties"/>
-		              <module-option name="rolesProperties" value="${jboss.server.config.dir}/application-roles.properties"/>
-		            </login-module>
-		          </authentication>
-		        </security-domain>
-		        <security-domain name="ds-name-security-primary" cache-type="default">
-                    <authentication>
-                        <login-module code="org.picketbox.datasource.security.SecureIdentityLoginModule" flag="required">
-                               <module-option name="username" value="" />
-                                <module-option name="password" value="" />
-                        </login-module>
-                    </authentication>
-                </security-domain>
+							<security-domain name="messaging" cache-type="default">
+								<authentication>
+									<login-module code="RealmUsersRoles" flag="required">
+										<module-option name="unauthenticatedIdentity" value="guest"/>
+										<module-option name="usersProperties" value="${jboss.server.config.dir}/application-users.properties"/>
+										<module-option name="rolesProperties" value="${jboss.server.config.dir}/application-roles.properties"/>
+									</login-module>
+								</authentication>
+							</security-domain>
+							<security-domain name="ds-name-security-primary" cache-type="default">
+								<authentication>
+									<login-module code="org.picketbox.datasource.security.SecureIdentityLoginModule" flag="required">
+										<module-option name="username" value="appian" />
+										<module-option name="password" value="570b223e45c3b56cd054bfa1fbb5ba8c" />
+									</login-module>
+								</authentication>
+							</security-domain>
+							<security-domain name="ds-name-security-business" cache-type="default">
+								<authentication>
+									<login-module code="org.picketbox.datasource.security.SecureIdentityLoginModule" flag="required">
+										<module-option name="username" value="appian" />
+										<module-option name="password" value="570b223e45c3b56cd054bfa1fbb5ba8c" />
+									</login-module>
+								</authentication>
+							</security-domain>
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
