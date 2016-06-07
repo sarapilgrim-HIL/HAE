@@ -1,0 +1,17 @@
+<xsd:schema
+  targetNamespace="http://dev.appian.shamlal.com:8081/suite/types/"
+  xmlns:tns="http://dev.appian.shamlal.com:8081/suite/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="MTN_GroupSelection">
+    <xsd:sequence>
+      <xsd:element name="id" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+					@Id
+				</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+	  <xsd:element name="parent" nillable="true" type="xsd:string"/>
+      <xsd:element name="name" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
