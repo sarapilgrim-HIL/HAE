@@ -127,6 +127,9 @@ conf.mailhandler.mail.smtp.host=192.168.2.204:587
 #conf.mailhandler.mail.smtp.starttls.enable=false
 #conf.mailhandler.mail.smtp.starttls.required=false
 
+conf.suite.MAIL_SCHEME=http
+conf.suite.MAIL_SERVER_AND_PORT=localhost:8080
+
 ## Receiving Email - see documentation for configuration of ejb-jar.xml
 ## Aliases can be used to route email sent to a particular email address to a
 ## specified process model, process, or event.  They are of the form
