@@ -74,6 +74,22 @@ conf.suite.SERVER_AND_PORT=test.appian.shamlal.com:8081
 ## %3$s - the company name
 #resources.appian.ap.application.appian.ap.appianName=Appian Corporation
 
+## The minutes of inactivity before the session timeout warning dialog appears
+resources.appian.ap.application.appian.ap.session.timeoutwarn=60
+
+################################################################################
+# application specific #########################################################
+################################################################################
+
+project.name=HIL
+project.version.major=1
+project.version.minor=0
+
+resources.appian.ap.application.appian.ap.appname=HIL TEST APPIAN
+resources.appian.ap.application.appian.ap.version=16.2
+resources.appian.ap.application.appian.ap.copyrightYear=2016
+resources.appian.ap.application.appian.ap.appianName=Horizon Testing Appian Server
+
 ###############
 #### Email ####
 ###############
@@ -82,18 +98,18 @@ conf.suite.SERVER_AND_PORT=test.appian.shamlal.com:8081
 ## The address that will appear as the sender (the "From" address) of
 ## notification and password reset emails from the system.
 ## Defaults to appian-alerts@<serverdomain>
-#conf.mailhandler.ntf_sndr_addr=
+conf.mailhandler.ntf_sndr_addr=test.appian@hil.us
 ## The domain (portion after the "@") for the "from" email address for
 ## addresses created via expressions functions; also applies to the domain
 ## for alert emails when conf.mailhandler.ntf_sndr_addr is not set. Defaults to
 ## the domain of the server.
-#conf.mailhandler.email.domain=
+conf.mailhandler.email.domain=hil.us
 ## The host is the FQDN, hostname, or IP address of the SMTP server for sending
 ## email from the system. Muliple SMTP servers can be specified using a comma-
 ## separated list.  They will be tried in the order specified.  If a port
 ## other than 25 is required, append it to the hostname (e.g., mailhost3:9025)
 ## IMPORTANT: If this is not set, no email will be sent from the system.
-#conf.mailhandler.mail.smtp.host=<PROVIDE A VALUE>
+conf.mailhandler.mail.smtp.host=192.168.2.204:587
 ## The username used to connect to the SMTP server above.  Set
 ## conf.mailhandler.mail.smtp.auth=true if user/password are used.  Leave the
 ## default (false) to indicate that the SMTP server does not require
@@ -154,11 +170,25 @@ conf.suite.SERVER_AND_PORT=test.appian.shamlal.com:8081
 ###########################
 
 ## The limit to the number of rows returned in the Database Access node
-#resources.appian.process.application.arv.limit=10
+resources.appian.process.application.arv.limit=1000
 
+## Archiving
+## These two properties control what is displayed in the interface as the
+## defaults when configuring auto archiving for process models.
+conf.suite.AUTO_ARCHIVE_DELAY=7
+conf.suite.AUTO_DELETE_DELAY=0
+## The default amount of time before a completed/canceled process will auto
+## archived if not configured otherwise
+server.conf.exec.AUTOARCHIVE_DELAY=7
 ## Whether or not automatic archiving of completed and canceled processes is
 ## enabled.  1=enabled; 0=disabled
-#server.conf.exec.AUTOARCHIVE=1
+server.conf.exec.AUTOARCHIVE=1
+
+## Node Limits
+server.conf.processcommon.MAX_SPAWN_INSTANCES=100
+server.conf.processcommon.MAX_NODE_INSTANCES=1000
+
+server.conf.processcommon.MAX_EXEC_ENGINE_LOAD_METRIC=120
 
 ##################
 #### Analytics ###
