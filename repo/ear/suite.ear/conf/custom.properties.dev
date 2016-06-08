@@ -223,7 +223,7 @@ server.conf.processcommon.MAX_EXEC_ENGINE_LOAD_METRIC=120
 ## the data source that will be used as the Appian data source.
 ## Note: This data source must point to a separate tablespace than any listed
 ## in the conf.data.datasources configuration.
-conf.data.APPIAN_DATA_SOURCE=jdbc/appian_primary_dev
+conf.data.APPIAN_DATA_SOURCE=jdbc/appian_primary_dev162
 ## Comma-separated list of JNDI names of data sources on the application server
 ## that will be used to store business data.  This list is used by the Query
 ## Database smart service and Data Stores.
