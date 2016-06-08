@@ -536,7 +536,7 @@ SSLRandomSeed connect builtin
 #JkMount /suite/*.bg node3
  
 # Don't allow users to request anything from WEB-INF
-<Directory "/apps/serverApps/appian/static-content/web.war/WEB-INF">
+<Directory "/apps/serverApps/appian/static-content/web.war162/WEB-INF">
 Deny from all
 </Directory>
 
@@ -544,9 +544,9 @@ Deny from all
     ServerName dev.appian.shamlal.com
  #   SSLEngine on 
  
-	Alias /suite /apps/serverApps/appian/static-content/web.war
+	Alias /suite /apps/serverApps/appian/static-content/web.war162
 
-	<Directory "/apps/serverApps/appian/static-content/web.war/">
+	<Directory "/apps/serverApps/appian/static-content/web.war162/">
 	#Options MultiViews
 	AllowOverride FileInfo
 	#Order allow,deny
@@ -560,7 +560,6 @@ Deny from all
     JkStripSession On 
     # Set options for serving static Appian content
     JkMount /suite/*.bg node1
-    #JkMount /suite/*.bg node2
 	
     DocumentRoot "/apps/serverApps/apache/htdocs"
 
