@@ -6,7 +6,7 @@
       pool-name="HILMYSQL907"
       enabled="true" 
       use-java-context="false">
-    <xa-datasource-property name="URL">jdbc:mysql://192.168.2.207:3306/appian_primary_dev_162?useOldAliasMetadataBehavior=true</xa-datasource-property>
+    <xa-datasource-property name="URL">jdbc:mysql://192.168.2.207:3306/appian_primary_dev?useOldAliasMetadataBehavior=true</xa-datasource-property>
     <xa-datasource-property name="useUnicode">true</xa-datasource-property>
     <xa-datasource-property name="characterEncoding">UTF-8</xa-datasource-property>
     <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
