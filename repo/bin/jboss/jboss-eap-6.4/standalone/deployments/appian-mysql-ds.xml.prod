@@ -3,7 +3,7 @@
   <!-- System Datasource -->
   <xa-datasource 
       jndi-name="jdbc/hil_primary" 
-      pool-name="HILMYSQL907"
+      pool-name="MySqlDS"
       enabled="true" 
       use-java-context="false">
     <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_primary_upgrade?useOldAliasMetadataBehavior=true</xa-datasource-property>
@@ -26,7 +26,7 @@
   </xa-datasource>
 	<xa-datasource 
       jndi-name="jdbc/appian_business_dev" 
-      pool-name="HILMYSQL907"
+      pool-name="MySqlDS"
       enabled="true" 
       use-java-context="false">
     <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_business_upgrade?useOldAliasMetadataBehavior=true</xa-datasource-property>
