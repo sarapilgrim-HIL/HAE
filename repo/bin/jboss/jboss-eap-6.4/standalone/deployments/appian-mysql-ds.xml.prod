@@ -6,7 +6,7 @@
       pool-name="MySqlDS"
       enabled="true" 
       use-java-context="false">
-    <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_primary_upgrade?useOldAliasMetadataBehavior=true</xa-datasource-property>
+    <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_primary?useOldAliasMetadataBehavior=true</xa-datasource-property>
     <xa-datasource-property name="useUnicode">true</xa-datasource-property>
     <xa-datasource-property name="characterEncoding">UTF-8</xa-datasource-property>
     <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
@@ -29,7 +29,7 @@
       pool-name="MySqlDS"
       enabled="true" 
       use-java-context="false">
-    <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_business_upgrade?useOldAliasMetadataBehavior=true</xa-datasource-property>
+    <xa-datasource-property name="URL">jdbc:mysql://appiandb1.cffkksecexqz.us-east-1.rds.amazonaws.com:3306/hil_business?useOldAliasMetadataBehavior=true</xa-datasource-property>
     <xa-datasource-property name="useUnicode">true</xa-datasource-property>
     <xa-datasource-property name="characterEncoding">UTF-8</xa-datasource-property>
     <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
