@@ -386,27 +386,15 @@ Include conf/extra/proxy-html.conf
 SSLRandomSeed startup builtin
 SSLRandomSeed connect builtin
 </IfModule>
-Alias /suite /var/www/static-content/web.war
-# Allow all vhost to inherit mounts from the main server (default is Off)
-    JkMountCopy All
-		
-<Directory "/var/www/static-content/web.war/">
-#Options MultiViews
-AllowOverride FileInfo
-#Order allow,deny
-#Allow from all
-Options All
- AllowOverride All
- Require all granted
-</Directory>
 
 
 
 
 # Don't allow users to request anything from WEB-INF
-<Directory "/var/www/static-content/web.war/WEB-INF">
+<Directory "/var/www/static-content/Appian-162/web.war/WEB-INF">
 Deny from all
 </Directory>
+
 # Load config files in the "/etc/httpd/conf.d" directory, if any.
 IncludeOptional conf.d/*.conf
 <VirtualHost 172.31.54.10>
@@ -419,6 +407,17 @@ IncludeOptional conf.d/*.conf
     # Set options for serving static Appian content
     JkMount /suite/*.bg node1
    
+		Alias /suite /var/www/static-content/Appian-162/web.war
+		
+		<Directory "/var/www/static-content/Appian-162/web.war/">
+			#Options MultiViews
+			AllowOverride FileInfo
+			#Order allow,deny
+			#Allow from all
+			Options All
+			AllowOverride All
+			Require all granted
+		</Directory>
 	
     DocumentRoot "/var/www/html"
 
