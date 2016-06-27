@@ -35,7 +35,7 @@ conf.suite.SCHEME=http
 ## Do not specify the :port if the port is 80 and the SCHEME is http, or the
 ## port is 443 and SCHEME is https.  This is the hostname and port portion of
 ## the URL viewed by end users in links (e.g., links in emails)
-conf.suite.SERVER_AND_PORT=sandbox.appian.shamlal.com:8081
+conf.suite.SERVER_AND_PORT=sandbox.appian.shamlal.com
 
 ## The STATIC_PORTAL_CSS_SOURCE_URL, STATIC_FORMS_JS_SOURCE_URL, and
 ## STATIC_PORTAL_JS_SOURCE_URL allow specifying an external host
