@@ -48,7 +48,7 @@ ServerRoot "/apps/serverApps/apache/"
 # Change this to Listen on specific IP addresses as shown below to 
 # prevent Apache from glomming onto all bound IP addresses.
 #
-#Listen 12.34.56.78:80
+Listen 192.168.2.204:80
 Listen 192.168.2.204:9091
 Listen 192.168.2.204:8081
 Listen 192.168.2.204:8080
@@ -755,7 +755,7 @@ Deny from all
     #</Location>
 </VirtualHost>
 
-<VirtualHost 192.168.2.204:80>
+<VirtualHost 192.168.2.204>
     ServerName sandbox.appian.shamlal.com
  #   SSLEngine on 
  
