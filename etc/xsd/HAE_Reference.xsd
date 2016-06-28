@@ -6,7 +6,7 @@
       <xsd:documentation>CDT to reference table</xsd:documentation>
     </xsd:annotation>
     <xsd:sequence>
-      <xsd:element name="id" nillable="true" type="xsd:int"/>
+      <xsd:element name="id" nillable="true" type="xsd:int">
           <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Id
@@ -15,42 +15,42 @@
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="label" nillable="true" type="xsd:string"/>
+      <xsd:element name="label" nillable="true" type="xsd:string">
           <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="LABEL")
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="value" nillable="true" type="xsd:string"/>
+      <xsd:element name="value" nillable="true" type="xsd:string">
             <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="VALUE")
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="custom" nillable="true" type="xsd:string"/>
+      <xsd:element name="custom" nillable="true" type="xsd:string">
             <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="CUSTOM")
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="category" nillable="true" type="xsd:string"/>
+      <xsd:element name="category" nillable="true" type="xsd:string">
             <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="CATEGORY")
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="displayOrder" nillable="true" type="xsd:int"/>
+      <xsd:element name="displayOrder" nillable="true" type="xsd:int">
             <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="DISPLAY_ORDER")
             </xsd:appinfo>
           </xsd:annotation>
       </xsd:element>
-      <xsd:element name="deleted" nillable="true" type="xsd:boolean"/>
+      <xsd:element name="deleted" nillable="true" type="xsd:boolean">
             <xsd:annotation>
             <xsd:appinfo source="appian.jpa">
               @Column(name="DELETED")
