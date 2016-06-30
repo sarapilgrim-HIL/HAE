@@ -1,0 +1,4 @@
+set NOPAUSE=true
+pushd %~dp0
+call jboss-cli.bat --connect command=:shutdown
+popd
