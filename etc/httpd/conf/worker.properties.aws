@@ -1,0 +1,12 @@
+worker.list=node1,node2
+worker.node1.host=172.31.55.85
+worker.node1.port=8009
+worker.node1.type=ajp13
+worker.node1.socket_connect_timeout=5000
+worker.node1.sticky_session=1
+
+worker.node2.host=172.31.15.198
+worker.node2.port=8010
+worker.node2.type=ajp13
+worker.node2.socket_connect_timeout=5000
+worker.node2.sticky_session=1
