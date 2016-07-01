@@ -5,7 +5,7 @@
     <xsd:annotation>
       <xsd:documentation>CDT to reference table</xsd:documentation>
                         <xsd:appinfo source ="appian.jpa">
-                                @Table(name="HAE_REFRENCE")
+                                @Table(name="HAE_REFERENCE")
                         </xsd:appinfo>
     </xsd:annotation>
     <xsd:sequence>
