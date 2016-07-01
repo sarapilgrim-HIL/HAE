@@ -4,6 +4,9 @@
   <xsd:complexType name="HAE_Reference">
     <xsd:annotation>
       <xsd:documentation>CDT to reference table</xsd:documentation>
+                        <xsd:appinfo source ="appian.jpa">
+                                @Table(name="HAE_REFRENCE")
+                        </xsd:appinfo>
     </xsd:annotation>
     <xsd:sequence>
       <xsd:element name="id" nillable="true" type="xsd:int">
