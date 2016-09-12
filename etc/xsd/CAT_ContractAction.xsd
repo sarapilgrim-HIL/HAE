@@ -51,7 +51,7 @@
           <xsd:appinfo source="appian.jpa">@Column(name="UPDATED_BY")</xsd:appinfo>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="deleteFlag" nillable="true" type="xsd:string">
+      <xsd:element name="deleteFlag" nillable="true" type="xsd:boolean">
         <xsd:annotation>
           <xsd:appinfo source="appian.jpa">@Column(name="DELETED_FLAG")</xsd:appinfo>
         </xsd:annotation>
