@@ -1,6 +1,8 @@
 /*
 TODO
 
+* Implement new game button
+
 * Bonus point targets
 ** Randomly assign a button to be worth double points
 ** Use random number in size of array
@@ -11,71 +13,35 @@ TODO
 
 */
 
-/*#include <Ethernet.h>
-#include <MySQL_Connection.h>
-#include <MySQL_Cursor.h>*/
-#include <LiquidCrystal.h>
+const int hitTimesFlash = 4;
+const int hitTimeFlashDelay = 200;
+const int bonusTimeFlashDelay = 500;
 
-// byte mac_addr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+const int numberTargetButtons = 2; // Update with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
 
-/*IPAddress server_addr(10, 100, 100, 117);    // IP of the MySQL *server* here
-char user[] = "root";                     // MySQL user login username
-char password[] = "Password1!";           // MySQL user login password
+const int targetButtonScore[] = {50, 100}; // Update for new button
 
-// Sample query
-char query[] = "SELECT name FROM test WHERE id = 1";
+/*const int buttonNewGamePin = 0;*/
+const int targetButtonPin[] = {9, 10}; // Update for new button
+const int targetLedPin[] = {6, 13}; // Update for new button
 
-EthernetClient client;
-MySQL_Connection conn((Client *)&client);
-// Create an instance of the cursor passing in the connection
-MySQL_Cursor cur = MySQL_Cursor(&conn);*/
+unsigned long currentMillis = 0;
+int targetLedFlashCount[] = {0, 0}; // Update for new button
+unsigned long targetLedPreviousMillis[] = {0, 0}; // Update for new button
 
-const String hitMessage = "  Direct Hit!";
-const int timeMessageSwitchDelay = 2000;
-const int timesFlash = 2;
-const int timeFlashDelay = 500;
-const int targetButtonScore[] = {50, 100};
-
-const int buttonNewGamePin = 0;
-const int targetButtonPin[] = {9, 10};
-const int targetLedPin[] = {6, 13};
-
-// int connectionTimeCounter = 1;
 
 int newGameNumber = 0;
 
 void setup() {
   Serial.begin(9600);
-  /*while (!Serial); // wait for serial port to connect
-  Ethernet.begin(mac_addr);
-  lcd.begin(16, 2);
-  lcd.print("Connecting...");
-  if (conn.connect(server_addr, 3306, user, password)) {
-    delay(1000);
-    lcd.clear();
-    lcd.print("Connecting...");
-    lcd.print(connectionTimeCounter);
-    connectionTimeCounter++;
-  }
-  else {
-    lcd.clear();
-    lcd.print("Connection failed.");
-    delay(5000);
-    lcd.clear();
-  }
-  lcd.clear();
-  lcd.print("Connection Successful!");
-  delay(timeMessageSwitchDelay);
-  lcd.clear();*/
   
   pinMode(buttonNewGamePin, INPUT);
   
-  for (int i = 0; i < sizeof(targetButtonPin); i++){
+  for (int i = 0; i < numberTargetButtons; i++){
     pinMode(targetButtonPin[i], INPUT);
   }
   
-  for (int i = 0; i < sizeof(targetLedPin); i++){
+  for (int i = 0; i < numberTargetButtons; i++){
     pinMode(targetLedPin[i], OUTPUT);
   }
   
@@ -89,48 +55,46 @@ void loop() {
   } else {
     
   }*/
-  
-  for (int i = 0; i < sizeof(targetButtonPin); i++) {
+	
+	currentMillis = millis(); 
+	checkTargetButtons();
+  flashTargetLeds();
+	
+}
+
+void checkTargetButtons() {
+	for(int i = 0; i < numberTargetButtons; i++) {
     if (digitalRead(targetButtonPin[i]) == HIGH) {
-      displayHitMessage(i);
-      delay(100);
+      targetLedFlashCount[i] += hitTimesFlash;
+			delay(250);
+			displayHitMessage(i); // For debugging only, to be replaced by MySQL method
     }
     else {
       
     }
   }
-  
-  delay(100);
 }
 
-void displayNewGameMessage() {
-  lcd.begin(16, 2);
-  lcd.print("   New game!");
-  lcd.setCursor(0,1);
-  lcd.print("   Number: ");
-  lcd.print(newGameNumber);
-	delay(timeMessageSwitchDelay);
-  lcd.clear();
+void flashTargetLeds() {
+	for (int i = 0; i < numberTargetButtons; i++) {
+		if (targetLedFlashCount[i] > 0 && digitalRead(targetLedPin[i]) == LOW) {
+			if (currentMillis - targetLedPreviousMillis[i] >= hitTimeFlashDelay) {
+				digitalWrite(targetLedPin[i], HIGH);
+				targetLedPreviousMillis[i] = millis();
+				targetLedFlashCount[i] -= 1;
+			}
+		} 
+		else {
+			if (currentMillis - targetLedPreviousMillis[i] >= hitTimeFlashDelay) {
+				digitalWrite(targetLedPin[i], LOW);
+				targetLedPreviousMillis[i] = millis();
+			}	
+		}
+	}
 }
 
+// For debugging only
 void displayHitMessage(int i) {
-  lcd.begin(16, 2);
-  lcd.print(hitMessage);
-  flashButton(i, timesFlash);
-  lcd.clear();
-  lcd.begin(16, 2);
-  lcd.print("  ");
-  lcd.print(targetButtonScore[i]); 
-  lcd.print(" Points!");
-  flashButton(i, timesFlash);
-  lcd.clear();
-}
-
-void flashButton(int i, int numberTimes) {
-  for(int x = 0; x < numberTimes; x++) {
-    digitalWrite(targetLedPin[i], HIGH);
-    delay(timeFlashDelay);
-    digitalWrite(targetLedPin[i], LOW);
-    delay(timeFlashDelay);
-  }
+  Serial.print(targetButtonScore[i]); 
+  Serial.println(" Points!");
 }
