@@ -1,13 +1,7 @@
 '''
 Created on Feb 5, 2017
 
-@author: Brett
-'''
-
-'''
-TODO
-- fix bug - sometimes data comes in as 5 then 0 instead of 50, so it inserts those 2 rows.
-- implement newGame insert as its own method?
+@author: Brett Rojas
 '''
 
 
@@ -23,28 +17,30 @@ db = MySQLdb.connect(host="localhost",    # your host, usually localhost
 
 cur = db.cursor()
 
-timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-print(timestamp)
-cur.execute("INSERT INTO GAME (START_TIME) values (%s)", (timestamp, ))
-db.commit()
-newGameNumber = cur.execute("SELECT MAX(ID) FROM GAME GROUP BY ID") + 0
-
-ser = serial.Serial('COM3', 9600, timeout=0)
+global newGameNumber
+ser = serial.Serial('COM3', 9600, timeout=.1)
 sleepTime = .1
 
-print(newGameNumber)
- 
+def newGame():
+    timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    cur.execute("INSERT INTO GAME (START_TIME) values (%s)", (timestamp, ))
+    db.commit()
+    newGameNumber = cur.execute("SELECT MAX(ID) FROM GAME GROUP BY ID") + 0
+    print('New Game: ' + str(newGameNumber) + '\n')
+    return newGameNumber
+
+newGameNumber = newGame()
+
 while True:
     try:
         data = ser.readline().decode("utf-8")     
-        if data == '': continue                   
-
-        print(data)
+        if data == '': continue
         time.sleep(sleepTime)
 
-        if data == 'NewGame':
-            pass
+        if data.strip() == 'NewGame':
+            newGameNumber = newGame()
         else: 
+            print('Target Hit! ' + str(data.strip()) + ' points!' + '\n')
             cur.execute('INSERT INTO SHOT (GAME_ID, POINTS) values (%s, %s)', (newGameNumber, data))
             db.commit()
 

@@ -11,25 +11,28 @@ TODO
 
 */
 
-const int hitTimesFlash = 4;
+const int numberTargetButtons = 1; // Update with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
+const int targetButtonScore[] = {100}; // Update for new button
+const int targetButtonPin[] = {13}; // Update for new button
+const int targetLedPin[] = {7}; // Update for new button
+int targetLedFlashCount[] = {0}; // Update for new button
+unsigned long targetLedPreviousMillis[] = {0}; // Update for new button
+
+const int newGameButtonPin = 12;
+const int newGameLedPin = 6;
+const int newGameTimesFlash = 4;
+const int newGameFlashDelay = 250;
+
+const int hitTimesFlash = 2;
 const int hitTimeFlashDelay = 250;
 const int bonusTimeFlashDelay = 500;
-
-const int numberTargetButtons = 2; // Update with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
-
-const int targetButtonScore[] = {50, 100}; // Update for new button
-
-/*const int buttonNewGamePin = 0;*/
-const int targetButtonPin[] = {12, 13}; // Update for new button
-const int targetLedPin[] = {6, 7}; // Update for new button
-
-int targetLedFlashCount[] = {0, 0}; // Update for new button
-unsigned long targetLedPreviousMillis[] = {0, 0}; // Update for new button
+const int buttonCheckDelay = 250;
 
 void setup() {
   Serial.begin(9600);
   
-  /*pinMode(buttonNewGamePin, INPUT);*/
+  pinMode(newGameButtonPin, INPUT);
+	pinMode(newGameLedPin, OUTPUT);
   
   for (int i = 0; i < numberTargetButtons; i++){
     pinMode(targetButtonPin[i], INPUT);
@@ -43,23 +46,36 @@ void setup() {
 
 void loop() {
   
-  /*if (digitalRead(buttonNewGamePin) == HIGH) {
-    Serial.print("NewGame");
-  } else {
-    
-  }*/
-  
+  checkNewGameButton();
   checkTargetButtons();
   flashTargetLeds();
   
 }
 
+void checkNewGameButton() {
+	if (digitalRead(newGameButtonPin) == HIGH) {
+		Serial.println("NewGame");
+		for (int i = 0; i < numberTargetButtons; i++) {
+			digitalWrite(targetLedPin[i], LOW);
+			targetLedFlashCount[i] = 0;
+		}
+		for (int i = 0; i <newGameTimesFlash; i++) {
+			digitalWrite(newGameLedPin, HIGH);
+			delay(newGameFlashDelay);
+			digitalWrite(newGameLedPin, LOW);
+			delay(newGameFlashDelay);
+		}
+  } else {
+    
+  }
+}
+
 void checkTargetButtons() {
-  for(int i = 0; i < numberTargetButtons; i++) {
+  for (int i = 0; i < numberTargetButtons; i++) {
     if (digitalRead(targetButtonPin[i]) == HIGH) {
       targetLedFlashCount[i] += hitTimesFlash;
-      delay(250);
       Serial.println(targetButtonScore[i]);
+			delay(buttonCheckDelay);
     }
     else {
       
