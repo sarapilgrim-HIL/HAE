@@ -1,18 +1,17 @@
 /*
 TODO
 
-* MAYBE - Keep bonus going if you hit a different target? Currently, hitting any target resets the bonus target
 */
 
 // PIN 0 AND 1 SHOULD NOT BE USED!
-const int numberTargetButtons = 5; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
-const int targetButtonScore[] = {3, 4, 5, 6, 7}; // UPDATE for new button
-const int targetButtonPin[] = {9, 10, 11, 12, 13}; // UPDATE for new button KEEP IN SEQUENTIAL ORDER FOR RANDOM BONUS!
-const int targetLedPin[] = {3, 4, 5, 6, 7}; // UPDATE for new button
-int targetLedFlashCount[] = {0, 0, 0, 0, 0}; // UPDATE for new button
-unsigned long targetLedPreviousMillis[] = {0, 0, 0, 0, 0}; // UPDATE for new button
+const int numberTargetButtons = 3; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
+const int targetButtonPin[] = {11, 12, 13}; // UPDATE for new button KEEP IN SEQUENTIAL ORDER FOR RANDOM BONUS!
+const int targetButtonScore[] = {3, 4, 5}; // UPDATE for new button
+const int targetLedPin[] = {3, 4, 5}; // UPDATE for new button
+/*int targetLedFlashCount[] = {0, 0, 0}; // UPDATE for new button*/
+/*unsigned long targetLedPreviousMillis[] = {0, 0, 0}; // UPDATE for new button*/
 
-const int newGameButtonPin = 8;
+const int newGameButtonPin = 10;
 const int newGameLedPin = 2;
 
 const int newGameTimesFlash = 5;
@@ -21,10 +20,7 @@ const int newGameFlashDelay = 500;
 const int hitTimesFlash = 4;
 const int hitTimeFlashDelay = 250;
 
-const int buttonCheckDelay = 1000;
-
 int bonusIndex = 0;
-int previousBonusIndex = 0;
 unsigned long bonusLedPreviousMillis = 0;
 int bonusLedFlashCount = 0;
 
@@ -57,8 +53,8 @@ void loop() {
   checkBonusIndex();
   flashBonusLed();
   checkTargetButtons();
-  flashTargetLeds();
-  delay(100); // TODO: THIS IS FOR DEBUGGING ONLINE ONLY!!!! REMOVE ME!!!!!
+  /*flashTargetLeds();*/
+  // delay(100); // TODO: THIS IS FOR DEBUGGING ONLINE ONLY!!!! REMOVE ME!!!!!
 }
 
 void checkNewGameButton() {
@@ -66,7 +62,7 @@ void checkNewGameButton() {
     Serial.println("NewGame");
     for (int i = 0; i < numberTargetButtons; i++) {
       digitalWrite(targetLedPin[i], LOW);
-      targetLedFlashCount[i] = 0;
+      /*targetLedFlashCount[i] = 0;*/
     }
     for (int i = 0; i <newGameTimesFlash; i++) {
       digitalWrite(newGameLedPin, HIGH);
@@ -83,6 +79,24 @@ void checkNewGameButton() {
 void checkTargetButtons() {
   for (int i = 0; i < numberTargetButtons; i++) {
     if (digitalRead(targetButtonPin[i]) == HIGH) {
+      if (i == bonusIndex) {
+        Serial.println(targetButtonScore[i] * bonusMultiplier);
+      }
+      else {
+        Serial.println(targetButtonScore[i]);
+      }
+			flashHitLed(i);
+      setBonusIndex();
+    }
+    else {
+      
+    }
+  }
+}
+
+/*void checkTargetButtons() {
+  for (int i = 0; i < numberTargetButtons; i++) {
+    if (targetLedFlashCount[i] == 0 && digitalRead(targetButtonPin[i]) == HIGH) {
       targetLedFlashCount[i] += hitTimesFlash;
       if (i == bonusIndex) {
         Serial.println(targetButtonScore[i] * bonusMultiplier);
@@ -91,15 +105,24 @@ void checkTargetButtons() {
         Serial.println(targetButtonScore[i]);
       }
       setBonusIndex();
-      delay(buttonCheckDelay);
     }
     else {
       
     }
   }
+}*/
+
+void flashHitLed(int hitIndex) {
+	for (int i = 0; i < hitTimesFlash; i++) {
+		digitalWrite(targetLedPin[bonusIndex], LOW);
+		digitalWrite(targetLedPin[hitIndex], HIGH);
+		delay(hitTimeFlashDelay);
+		digitalWrite(targetLedPin[hitIndex], LOW);
+		delay(hitTimeFlashDelay);
+	}
 }
 
-void flashTargetLeds() {
+/*void flashTargetLeds() {
   for (int i = 0; i < numberTargetButtons; i++) {
     if (targetLedFlashCount[i] > 0 && digitalRead(targetLedPin[i]) == LOW) {
       if (millis() - targetLedPreviousMillis[i] >= hitTimeFlashDelay) {
@@ -115,7 +138,7 @@ void flashTargetLeds() {
       } 
     }
   }
-}
+}*/
 
 void checkBonusIndex() {
   if (bonusLedFlashCount == 0 && millis() - bonusLedPreviousMillis >= bonusTimeFlashDelay) {
@@ -127,10 +150,7 @@ void checkBonusIndex() {
 void setBonusIndex() {
   bonusLedFlashCount = 0;
   digitalWrite(targetLedPin[bonusIndex], LOW);
-	previousBonusIndex = bonusIndex;
-	while(previousBonusIndex == bonusIndex || targetLedFlashCount[bonusIndex] > 0) {
-		bonusIndex = random(0, numberTargetButtons);
-	}
+	bonusIndex = random(0, numberTargetButtons);
 }
 
 void flashBonusLed() {
