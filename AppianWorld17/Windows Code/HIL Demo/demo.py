@@ -18,7 +18,7 @@ db = MySQLdb.connect(host="localhost",    # your host, usually localhost
 cur = db.cursor()
 
 global newGameNumber
-ser = serial.Serial('COM3', 9600, timeout=.1)
+ser = serial.Serial('COM3', 9600)
 sleepTime = .1
 
 def newGame():
