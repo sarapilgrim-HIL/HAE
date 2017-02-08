@@ -5,23 +5,23 @@ TODO
 */
 
 // PIN 0 AND 1 SHOULD NOT BE USED!
-const int numberTargetButtons = 5; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
-const int targetButtonScore[] = {3, 4, 5, 6, 7}; // UPDATE for new button
-const int targetButtonPin[] = {9, 10, 11, 12, 13}; // UPDATE for new button KEEP IN SEQUENTIAL ORDER FOR RANDOM BONUS!
-const int targetLedPin[] = {3, 4, 5, 6, 7}; // UPDATE for new button
-int targetLedFlashCount[] = {0, 0, 0, 0, 0}; // UPDATE for new button
-unsigned long targetLedPreviousMillis[] = {0, 0, 0, 0, 0}; // UPDATE for new button
+const int numberTargetButtons = 2; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
+const int targetButtonScore[] = {2,3}; // UPDATE for new button
+const int targetButtonPin[] = {8,9}; // UPDATE for new button KEEP IN SEQUENTIAL ORDER FOR RANDOM BONUS!
+const int targetLedPin[] = {2,3}; // UPDATE for new button
+int targetLedFlashCount[] = {0, 0}; // UPDATE for new button
+unsigned long targetLedPreviousMillis[] = {0, 0}; // UPDATE for new button
 
-const int newGameButtonPin = 8;
+/*const int newGameButtonPin = 8;
 const int newGameLedPin = 2;
 
 const int newGameTimesFlash = 5;
-const int newGameFlashDelay = 500;
+const int newGameFlashDelay = 500;*/
 
 const int hitTimesFlash = 4;
 const int hitTimeFlashDelay = 250;
 
-const int buttonCheckDelay = 1000;
+const int buttonCheckDelay = 250;
 
 int bonusIndex = 0;
 int previousBonusIndex = 0;
@@ -35,8 +35,8 @@ const int bonusTimeFlashDelay = 1000;
 void setup() {
   Serial.begin(9600);
   
-  pinMode(newGameButtonPin, INPUT);
-  pinMode(newGameLedPin, OUTPUT);
+  /*pinMode(newGameButtonPin, INPUT);
+  pinMode(newGameLedPin, OUTPUT);*/
   
   for (int i = 0; i < numberTargetButtons; i++){
     pinMode(targetButtonPin[i], INPUT);
@@ -53,15 +53,15 @@ void setup() {
 
 void loop() {
 	
-  checkNewGameButton();
+  /*checkNewGameButton();*/
   checkBonusIndex();
   flashBonusLed();
   checkTargetButtons();
   flashTargetLeds();
-  delay(100); // TODO: THIS IS FOR DEBUGGING ONLINE ONLY!!!! REMOVE ME!!!!!
+  // delay(100); // TODO: THIS IS FOR DEBUGGING ONLINE ONLY!!!! REMOVE ME!!!!!
 }
 
-void checkNewGameButton() {
+/*void checkNewGameButton() {
   if (digitalRead(newGameButtonPin) == HIGH) {
     Serial.println("NewGame");
     for (int i = 0; i < numberTargetButtons; i++) {
@@ -78,7 +78,7 @@ void checkNewGameButton() {
   } else {
     
   }
-}
+}*/
 
 void checkTargetButtons() {
   for (int i = 0; i < numberTargetButtons; i++) {
@@ -128,7 +128,12 @@ void setBonusIndex() {
   bonusLedFlashCount = 0;
   digitalWrite(targetLedPin[bonusIndex], LOW);
 	previousBonusIndex = bonusIndex;
-	while(previousBonusIndex == bonusIndex || targetLedFlashCount[bonusIndex] > 0) {
+	if (numberTargetButtons > 2) {
+		while(previousBonusIndex == bonusIndex || targetLedFlashCount[bonusIndex] > 0) {
+			bonusIndex = random(0, numberTargetButtons);
+		}
+	}
+	else {
 		bonusIndex = random(0, numberTargetButtons);
 	}
 }
