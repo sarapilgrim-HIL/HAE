@@ -26,7 +26,7 @@ int bonusLedFlashCount = 0;
 
 const int bonusMultiplier = 2;
 const int bonusTimesFlash = 5;
-const int bonusTimeFlashDelay = 1000;
+const int bonusTimeFlashDelay = 500;
 
 void setup() {
   Serial.begin(9600);
@@ -118,6 +118,12 @@ void flashHitLed(int hitIndex) {
 		digitalWrite(targetLedPin[hitIndex], HIGH);
 		delay(hitTimeFlashDelay);
 		digitalWrite(targetLedPin[hitIndex], LOW);
+		delay(hitTimeFlashDelay);
+	}
+	for (int i = 0; i < 2; i++) { 
+		digitalWrite(newGameLedPin, HIGH);
+		delay(hitTimeFlashDelay);
+		digitalWrite(newGameLedPin, LOW);
 		delay(hitTimeFlashDelay);
 	}
 }
