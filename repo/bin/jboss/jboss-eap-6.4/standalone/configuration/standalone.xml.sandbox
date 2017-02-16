@@ -142,16 +142,6 @@
                 </address-settings>
 
                 <jms-connection-factories>
-                    <connection-factory name="InternalConnectionFactory">
-                        <connectors>
-                            <connector-ref connector-name="netty"/>
-                        </connectors>
-                        <entries>
-                            <entry name="java:/ClusteredConnectionFactory"/>
-                            <entry name="comp/suite/jms-transient-topic-handler/JmsTransientTopicHandlerBean/env/ClusteredConnectionFactory"/>
-                            <entry name="module/suite/web/env/ClusteredConnectionFactory"/>
-                        </entries>
-                    </connection-factory>
                     <connection-factory name="ProcessIntegrationConnectionFactory">
                         <connectors>
                             <connector-ref connector-name="netty"/>
@@ -177,23 +167,7 @@
                         <entry name="jms/AppianProcessIntegrationQueue"/>
                         <entry name="java:jboss/exported/jms/AppianProcessIntegrationQueue"/>
                     </jms-queue>
-                    <jms-topic name="jms/TransientTopic">
-                        <entry name="java:/jms/AppianTransientTopic"/>
-                        <entry name="comp/suite/jms-transient-topic-handler/JmsTransientTopicHandlerBean/env/jms/AppianTransientTopic"/>
-                        <entry name="module/suite/web/env/jms/AppianTransientTopic"/>
-                    </jms-topic>
                 </jms-destinations>
-
-                <!-- Enabling clustering -->
-                <!--
-                <cluster-connections>
-                    <cluster-connection name="appian-cluster">
-                        <address>jms</address>
-                        <connector-ref>netty</connector-ref>
-                        <discovery-group-ref discovery-group-name="appian-discovery-group"/>
-                    </cluster-connection>
-                </cluster-connections>
-                -->
 
             </hornetq-server>
         </subsystem>
