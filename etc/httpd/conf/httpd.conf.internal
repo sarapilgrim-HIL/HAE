@@ -653,9 +653,9 @@ Deny from all
     ServerName sandbox.appian.shamlal.com
  #   SSLEngine on 
  
-	Alias /suite /apps/serverApps/appian/static-content/web.war162
+	Alias /suite /apps/serverApps/appian/static-content/web.war171
 
-	<Directory "/apps/serverApps/appian/static-content/web.war162/">
+	<Directory "/apps/serverApps/appian/static-content/web.war171/">
 	#Options MultiViews
 	AllowOverride FileInfo
 	#Order allow,deny
