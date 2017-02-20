@@ -4,21 +4,23 @@ TODO
 */
 
 // PIN 0 AND 1 SHOULD NOT BE USED!
-const int numberTargetButtons = 3; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
-const int targetButtonPin[] = {11, 12, 13}; // UPDATE for new button KEEP IN SEQUENTIAL ORDER FOR RANDOM BONUS!
-const int targetButtonScore[] = {3, 4, 5}; // UPDATE for new button
-const int targetLedPin[] = {3, 4, 5}; // UPDATE for new button
+const int numberTargetButtons = 5; // UPDATE with count of buttons, sizeof() doesn't seem to cooperate and apparently there is no count / array length function!?
+const int targetButtonPin[] = {2, 3, 4, 5, 6}; // UPDATE for new button
+const int targetButtonScore[] = {2, 3, 4, 5, 6}; // UPDATE for new button
+const int targetLedPin[] = {9, 10, 11, 12, 13}; // UPDATE for new button
 /*int targetLedFlashCount[] = {0, 0, 0}; // UPDATE for new button*/
 /*unsigned long targetLedPreviousMillis[] = {0, 0, 0}; // UPDATE for new button*/
 
-const int newGameButtonPin = 10;
-const int newGameLedPin = 2;
+const int newGameButtonPin = 7;
+const int newGameLedPin = 8;
 
 const int newGameTimesFlash = 5;
 const int newGameFlashDelay = 500;
 
 const int hitTimesFlash = 4;
 const int hitTimeFlashDelay = 250;
+
+const int switchDelay = 500;
 
 int bonusIndex = 0;
 unsigned long bonusLedPreviousMillis = 0;
@@ -71,6 +73,7 @@ void checkNewGameButton() {
       delay(newGameFlashDelay);
     }
     setBonusIndex();
+		delay(switchDelay);
   } else {
     
   }
@@ -126,6 +129,7 @@ void flashHitLed(int hitIndex) {
 		digitalWrite(newGameLedPin, LOW);
 		delay(hitTimeFlashDelay);
 	}
+	delay(switchDelay);
 }
 
 /*void flashTargetLeds() {
