@@ -20,6 +20,8 @@ const int newGameFlashDelay = 500;
 const int hitTimesFlash = 4;
 const int hitTimeFlashDelay = 250;
 
+const int newShotFlashTimes = 2;
+
 const int switchDelay = 500;
 
 int bonusIndex = 0;
@@ -28,7 +30,7 @@ int bonusLedFlashCount = 0;
 
 const int bonusMultiplier = 2;
 const int bonusTimesFlash = 5;
-const int bonusTimeFlashDelay = 500;
+const int bonusTimeFlashDelay = 750;
 
 void setup() {
   Serial.begin(9600);
@@ -123,12 +125,13 @@ void flashHitLed(int hitIndex) {
 		digitalWrite(targetLedPin[hitIndex], LOW);
 		delay(hitTimeFlashDelay);
 	}
-	for (int i = 0; i < 2; i++) { 
+	/*for (int i = 0; i < 2; i++) { 
 		digitalWrite(newGameLedPin, HIGH);
 		delay(hitTimeFlashDelay);
 		digitalWrite(newGameLedPin, LOW);
 		delay(hitTimeFlashDelay);
-	}
+	}*/
+	flashAllButtons();
 	delay(switchDelay);
 }
 
@@ -178,4 +181,17 @@ void flashBonusLed() {
     } 
   }
   
+}
+
+void flashAllButtons() {
+	for (int i = 0; i < newShotFlashTimes; i++) {
+		for (int i = 0; i < numberTargetButtons; i++) {
+			digitalWrite(targetLedPin[i], HIGH);
+		}
+		delay(switchDelay);
+		for (int i = 0; i < numberTargetButtons; i++) {
+			digitalWrite(targetLedPin[i], LOW);
+		}
+		delay(switchDelay);
+	}
 }
