@@ -109,25 +109,24 @@ conf.mailhandler.email.domain=hil.us
 ## separated list.  They will be tried in the order specified.  If a port
 ## other than 25 is required, append it to the hostname (e.g., mailhost3:9025)
 ## IMPORTANT: If this is not set, no email will be sent from the system.
-conf.mailhandler.mail.smtp.host=192.168.2.204:587
-##conf.mailhandler.mail.smtp.host=email-smtp.us-east-1.amazonaws.com:587
+##conf.mailhandler.mail.smtp.host=192.168.2.204:587
+conf.mailhandler.mail.smtp.host=email-smtp.us-east-1.amazonaws.com
 ## The username used to connect to the SMTP server above.  Set
 ## conf.mailhandler.mail.smtp.auth=true if user/password are used.  Leave the
 ## default (false) to indicate that the SMTP server does not require
 ## authentication. If multiple SMTP servers are defined above, the same auth
 ## settings will apply to all servers
-#conf.mailhandler.mail.smtp.auth=false
-#conf.mailhandler.mail.user=
-##conf.mailhandler.mail.user=AKIAJHSY7Y5T7FFFR7GQ
+conf.mailhandler.mail.smtp.auth=true
+conf.mailhandler.mail.user=AKIAJHSY7Y5T7FFFR7GQ
 ## The protocol should be set to either smtp or smtps. The default value is smtp.
-#conf.mailhandler.mail.transport.protocol=smtp
+conf.mailhandler.mail.transport.protocol=smtps
 ## You can enable or require starttls with the "smtp" protocol.  Setting
 ## starttls.enable=true will cause outgoing mail to use STARTTLS if supported by
 ## the remote server but will fall back to plain smtp otherwise.  Also setting
 ## starttls.required=true will cause mail to fail if the remote server does not
 ## support STARTTLS.
-#conf.mailhandler.mail.smtp.starttls.enable=true
-#conf.mailhandler.mail.smtp.starttls.required=true
+conf.mailhandler.mail.smtp.starttls.enable=true
+conf.mailhandler.mail.smtp.starttls.required=true
 
 conf.suite.MAIL_SCHEME=http
 conf.suite.MAIL_SERVER_AND_PORT=localhost:8080
